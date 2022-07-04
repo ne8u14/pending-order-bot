@@ -46,7 +46,9 @@ export class PendingOrderDETH2DICPService {
         Limit: {
           order_direction: { Bid: null },
           price: BigInt(price),
-          volume: defaultPVADecimals.toVolume('1'),
+          volume: defaultPVADecimals.toVolume(
+            (Math.random() * 100 + 10).toString(),
+          ),
         },
       });
     }
@@ -70,7 +72,9 @@ export class PendingOrderDETH2DICPService {
         Limit: {
           order_direction: { Ask: null },
           price: BigInt(price),
-          volume: defaultPVADecimals.toVolume('1'),
+          volume: defaultPVADecimals.toVolume(
+            (Math.random() * 100 + 10).toString(),
+          ),
         },
       });
     }
