@@ -35,7 +35,9 @@ export class PendingOrderService {
     const inputs: SubmitOrderDetails[] = [];
     for (let i = 0; i < get_order_count(); i++) {
       const price =
-        Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
+        Number(depthDto.askPrice) +
+        Math.floor(Math.random() * (get_max() - get_min() + 1)) +
+        get_min();
       this.logger.debug(`price: ${BigInt(price)}`);
       inputs.push({
         Limit: {
