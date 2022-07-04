@@ -1,14 +1,14 @@
 {
-  "host": "https://8000-icnaming-canistermonito-t4us11pnw21.ws.gitpod.nicepod.xyz/",
-  "canister": {
-    "token_test_DBTC": "",
-    "token_test_DICP": "",
-    "token_test_DETH": "",
-    "DBTC_DICP_fusion": "",
-    "DBTC_DICP_orderbook_kline": "",
-    "DBTC_DICP_orderbook_depth": "",
-    "DETH_DICP_fusion": "",
-    "DETH_DICP_orderbook_kline": "",
-    "DETH_DICP_orderbook_depth": ""
+  "host": "https://8000-delandlabs-delandcanist-3o8tyj4qjap.ws.gitpod.nicepod.xyz/",
+  "canisters": {
+    "token_test_DBTC": "q3fc5-haaaa-aaaaa-aaahq-cai",
+    "token_test_DICP": "sbzkb-zqaaa-aaaaa-aaaiq-cai",
+    "token_test_DETH": "sgymv-uiaaa-aaaaa-aaaia-cai",
+    "DBTC_DICP_fusion": "r7inp-6aaaa-aaaaa-aaabq-cai",
+    "DBTC_DICP_orderbook_kline": "rno2w-sqaaa-aaaaa-aaacq-cai",
+    "DBTC_DICP_orderbook_depth": "rkp4c-7iaaa-aaaaa-aaaca-cai",
+    "DETH_DICP_fusion": "qjdve-lqaaa-aaaaa-aaaeq-cai",
+    "DETH_DICP_orderbook_kline": "qhbym-qaaaa-aaaaa-aaafq-cai",
+    "DETH_DICP_orderbook_depth": "qaa6y-5yaaa-aaaaa-aaafa-cai"
   }
 }

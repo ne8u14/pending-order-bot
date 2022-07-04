@@ -4,6 +4,7 @@ import { SchedulerRegistry } from '@nestjs/schedule';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TasksService } from './task.service';
+import { PendingOrderService } from './pendingOrder.service';
 
 @Module({
   imports: [ScheduleModule.forRoot()],
@@ -13,6 +14,7 @@ import { TasksService } from './task.service';
     SchedulerRegistry,
     ConfigService,
     TasksService,
+    PendingOrderService,
   ],
 })
 export class AppModule {}

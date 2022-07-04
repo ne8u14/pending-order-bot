@@ -6,7 +6,7 @@ import { createActor as createOrderbook_depth } from './orderbook_depth';
 import { identity } from '@deland-labs/ic-dev-kit';
 import { get_canister_id, get_host } from '../../src/dfxJson';
 
-export const createDBTCActor = (user?: string) => {
+const createDBTCActor = (user?: string) => {
   const canisterId = get_canister_id('token_test_DBTC');
   if (user === undefined) {
     return createWUSD(canisterId, {
