@@ -36,7 +36,7 @@ export class PendingOrderService {
     for (let i = 0; i < get_order_count(); i++) {
       const price =
         Math.floor(Math.random() * Number(depthDto.askPrice) + get_range()) + 1;
-      this.logger.debug(`price: ${price}`);
+      this.logger.debug(`price: ${BigInt(price)}`);
       inputs.push({
         Limit: {
           order_direction: { Ask: null },
@@ -94,7 +94,6 @@ export class PendingOrderService {
       defaultPVADecimals.toAmount(amount.toString()),
       [],
     );
-    this.logger.debug(response);
   }
 
   async approveDETH(
