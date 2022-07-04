@@ -13,6 +13,7 @@ export class TasksService {
   @Cron(CronExpression.EVERY_5_SECONDS)
   async handleCronDETH2DICP() {
     this.logger.debug(' handle cron');
+    await this.pendingOrderDETH2DICPService.getKline();
     await this.pendingOrderDETH2DICPService.approve(
       DETH_DICP_user,
       '10^4',
@@ -21,5 +22,6 @@ export class TasksService {
     await this.pendingOrderDETH2DICPService.cancelAllOrder();
     await this.pendingOrderDETH2DICPService.createBidOrder();
     await this.pendingOrderDETH2DICPService.createAskOrder();
+    await this.pendingOrderDETH2DICPService.getKline();
   }
 }
