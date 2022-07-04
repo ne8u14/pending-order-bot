@@ -20,28 +20,52 @@ import { SubmitOrderDetails } from '../scripts/declarations/fusion/fusion.did';
 import * as math from 'mathjs';
 
 @Injectable()
-export class PendingOrderService {
+export class PendingOrderDETH2DICPService {
   constructor(private logger: Logger) {}
 
-  async cancelDETH2DICPAllOrder(): Promise<void> {
+  async cancelAllOrder(): Promise<void> {
     const actor = createFusionActor(DETH_DICP_fusion, DETH_DICP_user);
     const response = await actor.cancel_all_orders();
     this.logger.debug(response);
   }
 
-  async createDETH2DICPOrder(): Promise<void> {
+  async createBidOrder(): Promise<void> {
     const actor = createFusionActor(DETH_DICP_fusion, DETH_DICP_user);
-    const depthDto = await this.getDETH2DICPDepth();
+    const depthDto = await this.getDepth();
     //ask
     const inputs: SubmitOrderDetails[] = [];
     for (let i = 0; i < get_order_count(); i++) {
       const r =
         Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
       const price =
-        depthDto.askPrice +
+        depthDto.bidPrice +
         defaultPVADecimals.toPrice((r / math.evaluate('10^4')).toString());
-      this.logger.debug(`random: ${BigInt(r)}`);
-      this.logger.debug(`price: ${BigInt(price)}`);
+      this.logger.debug(`bid random: ${BigInt(r)}`);
+      this.logger.debug(`bid price: ${BigInt(price)}`);
+      inputs.push({
+        Limit: {
+          order_direction: { Bid: null },
+          price: BigInt(price),
+          volume: defaultPVADecimals.toVolume('1'),
+        },
+      });
+    }
+    const response = await actor.batch_submit_order(inputs);
+    this.logger.debug(response);
+  }
+  async createAskOrder(): Promise<void> {
+    const actor = createFusionActor(DETH_DICP_fusion, DETH_DICP_user);
+    const depthDto = await this.getDepth();
+    //ask
+    const inputs: SubmitOrderDetails[] = [];
+    for (let i = 0; i < get_order_count(); i++) {
+      const r =
+        Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
+      const price =
+        depthDto.askPrice -
+        defaultPVADecimals.toPrice((r / math.evaluate('10^4')).toString());
+      this.logger.debug(`ask random: ${BigInt(r)}`);
+      this.logger.debug(`ask price: ${BigInt(price)}`);
       inputs.push({
         Limit: {
           order_direction: { Ask: null },
@@ -54,7 +78,7 @@ export class PendingOrderService {
     this.logger.debug(response);
   }
 
-  async getDETH2DICPDepth(): Promise<DepthDto> {
+  async getDepth(): Promise<DepthDto> {
     const actor = createOrderbook_depthActor(
       DETH_DICP_orderbook_depth,
       DETH_DICP_user,
@@ -73,7 +97,7 @@ export class PendingOrderService {
     }
   }
 
-  async getDETH2DICPKline(): Promise<void> {
+  async getKline(): Promise<void> {
     const actor = createOrderbook_klineActor(
       DETH_DICP_orderbook_kline,
       DETH_DICP_user,
@@ -82,12 +106,12 @@ export class PendingOrderService {
     const response = await actor.get_current_kline(5);
     if ('Ok' in response) {
       for (const kline of response.Ok) {
-        this.logger.debug(kline);
+        this.logger.debug(`kline: ${kline}`);
       }
     }
   }
 
-  async approveDBTC(
+  async approve(
     user: string,
     amount: string,
     canisterId: string,
@@ -97,33 +121,6 @@ export class PendingOrderService {
       [],
       canisterId,
       defaultPVADecimals.toAmount(amount.toString()),
-      [],
-    );
-  }
-
-  async approveDETH(
-    user: string,
-    amount: number,
-    canisterId: string,
-  ): Promise<void> {
-    const actor = createDETHActor(user);
-    const response = await actor.approve(
-      [],
-      canisterId,
-      defaultPVADecimals.toAmount(amount.toString()),
-      [],
-    );
-  }
-  async approveDICP(
-    user: string,
-    amount: number,
-    canisterId: string,
-  ): Promise<void> {
-    const actor = createDICPActor(user);
-    const response = await actor.approve(
-      [],
-      canisterId,
-      defaultPVADecimals.toVolume(amount.toString()),
       [],
     );
   }
