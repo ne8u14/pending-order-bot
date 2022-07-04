@@ -110,7 +110,7 @@ export class PendingOrderDETH2DICPService {
     const response = await actor.get_current_kline(5);
     if ('Ok' in response) {
       for (const kline of response.Ok) {
-        this.logger.debug(`kline: ${kline}`);
+        this.logger.debug(`kline: ${JSON.stringify(kline)}`);
       }
     }
   }
