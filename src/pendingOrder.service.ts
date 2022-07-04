@@ -38,7 +38,9 @@ export class PendingOrderService {
 
     const response = await actor.get_current_kline(5);
     if ('Ok' in response) {
-      this.logger.debug(response.Ok);
+      for (const kline of response.Ok) {
+        this.logger.debug(kline);
+      }
     }
   }
 
