@@ -17,6 +17,7 @@ import { defaultPVADecimals } from './PVADecimals';
 import { get_canister_id, get_max, get_min, get_order_count } from './dfxJson';
 import { DepthDto } from './pendingOrder.dto';
 import { SubmitOrderDetails } from '../scripts/declarations/fusion/fusion.did';
+import * as math from 'mathjs';
 
 @Injectable()
 export class PendingOrderService {
@@ -34,10 +35,12 @@ export class PendingOrderService {
     //ask
     const inputs: SubmitOrderDetails[] = [];
     for (let i = 0; i < get_order_count(); i++) {
+      const r =
+        Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
       const price =
-        Number(depthDto.askPrice) +
-        Math.floor(Math.random() * (get_max() - get_min() + 1)) +
-        get_min();
+        depthDto.askPrice +
+        defaultPVADecimals.toPrice((r / math.evaluate('10^4')).toString());
+      this.logger.debug(`random: ${BigInt(r)}`);
       this.logger.debug(`price: ${BigInt(price)}`);
       inputs.push({
         Limit: {
@@ -110,7 +113,6 @@ export class PendingOrderService {
       defaultPVADecimals.toAmount(amount.toString()),
       [],
     );
-    this.logger.debug(response);
   }
   async approveDICP(
     user: string,
@@ -124,6 +126,5 @@ export class PendingOrderService {
       defaultPVADecimals.toVolume(amount.toString()),
       [],
     );
-    this.logger.debug(response);
   }
 }
