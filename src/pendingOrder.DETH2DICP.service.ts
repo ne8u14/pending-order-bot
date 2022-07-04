@@ -53,7 +53,7 @@ export class PendingOrderDETH2DICPService {
       });
     }
     const response = await actor.batch_submit_order(inputs);
-    this.logger.debug(response);
+    this.logger.debug(`bid response: ${response}`);
   }
   async createAskOrder(): Promise<void> {
     const actor = createFusionActor(DETH_DICP_fusion, DETH_DICP_user);
@@ -79,7 +79,7 @@ export class PendingOrderDETH2DICPService {
       });
     }
     const response = await actor.batch_submit_order(inputs);
-    this.logger.debug(response);
+    this.logger.debug(`ask response: ${response}`);
   }
 
   async getDepth(): Promise<DepthDto> {
