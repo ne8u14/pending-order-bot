@@ -1,0 +1,8 @@
+image: docker.io/kentsday/dfx_rust:bullseye-dfx-0.10.0-gitpod-1
+tasks:
+  - name: dfx dev
+    init: |
+      . ~/fix_gitpod_path.sh
+      dfx start --host 0.0.0.0:8000 --background
+      dfx stop
+
