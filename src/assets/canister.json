@@ -1,0 +1,14 @@
+{
+  "host": "https://8000-icnaming-canistermonito-t4us11pnw21.ws.gitpod.nicepod.xyz/",
+  "canister": {
+    "token_test_DBTC": "",
+    "token_test_DICP": "",
+    "token_test_DETH": "",
+    "DBTC_DICP_fusion": "",
+    "DBTC_DICP_orderbook_kline": "",
+    "DBTC_DICP_orderbook_depth": "",
+    "DETH_DICP_fusion": "",
+    "DETH_DICP_orderbook_kline": "",
+    "DETH_DICP_orderbook_depth": ""
+  }
+}
