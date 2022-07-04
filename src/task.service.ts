@@ -12,14 +12,14 @@ export class TasksService {
     private logger: Logger,
   ) {}
   @Cron(CronExpression.EVERY_5_SECONDS)
-  async handleCron() {
+  async handleCronDETH2DICP() {
     this.logger.debug(' handle cron');
-    await this.pendingOrderService.getDETH2DICPDepth();
-    await this.pendingOrderService.getDETH2DICPKline();
     await this.pendingOrderService.approveDBTC(
       DBTC_DICP_user,
-      1000,
+      '10^4',
       get_canister_id('DBTC_DICP_fusion').toText(),
     );
+    await this.pendingOrderService.cancelDETH2DICPAllOrder();
+    await this.pendingOrderService.createDETH2DICPOrder();
   }
 }

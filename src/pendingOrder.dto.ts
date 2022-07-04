@@ -1,6 +1,8 @@
 export interface CanisterJson {
   host: string;
   canisters: CanisterDto[];
+  range: string;
+  orderCount: number;
 }
 
 export interface CanisterDto {
@@ -13,4 +15,11 @@ export interface CanisterDto {
   DETH_DICP_fusion: string;
   DETH_DICP_orderbook_kline: string;
   DETH_DICP_orderbook_depth: string;
+}
+
+export interface DepthDto {
+  bidPrice: bigint;
+  bidVolume: bigint;
+  askPrice: bigint;
+  askVolume: bigint;
 }

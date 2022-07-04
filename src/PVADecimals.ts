@@ -1,5 +1,6 @@
 import { unit } from '@deland-labs/ic-dev-kit';
 import BigNumber from 'bignumber.js';
+import * as math from 'mathjs';
 
 export const WICP_Decimals = 8;
 export const WUSD_Decimals = 8;
@@ -29,17 +30,23 @@ export class PVADecimals {
   }
 
   public toPrice(value: string): bigint {
-    const n = new BigNumber(value).shiftedBy(this.price_decimals).dp(0);
+    const n = new BigNumber(math.evaluate(value))
+      .shiftedBy(this.price_decimals)
+      .dp(0);
     return BigInt(n.toFormat());
   }
 
   public toVolume(value: string): bigint {
-    const n = new BigNumber(value).shiftedBy(this.volume_decimals).dp(0);
+    const n = new BigNumber(math.evaluate(value))
+      .shiftedBy(this.volume_decimals)
+      .dp(0);
     return BigInt(n.toFormat());
   }
 
   public toAmount(value: string): bigint {
-    const n = new BigNumber(value).shiftedBy(this.amount_decimals).dp(0);
+    const n = new BigNumber(math.evaluate(value))
+      .shiftedBy(this.amount_decimals)
+      .dp(0);
     return BigInt(n.toFormat());
   }
 

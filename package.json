@@ -49,7 +49,8 @@
     "rxjs": "^7.2.0",
     "sha256": "^0.2.0",
     "shelljs": "^0.8.5",
-    "swagger-ui-express": "^4.3.0"
+    "swagger-ui-express": "^4.3.0",
+    "mathjs": "^10.5.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
