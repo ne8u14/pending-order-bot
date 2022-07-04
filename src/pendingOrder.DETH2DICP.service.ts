@@ -39,7 +39,7 @@ export class PendingOrderDETH2DICPService {
         Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
       const price =
         depthDto.bidPrice +
-        defaultPVADecimals.toPrice((r / math.evaluate('10^4')).toString());
+        defaultPVADecimals.toPrice((r / math.evaluate('10^6')).toString());
       this.logger.debug(`bid random: ${BigInt(r)}`);
       this.logger.debug(`bid price: ${BigInt(price)}`);
       inputs.push({
@@ -63,7 +63,7 @@ export class PendingOrderDETH2DICPService {
         Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
       const price =
         depthDto.askPrice -
-        defaultPVADecimals.toPrice((r / math.evaluate('10^4')).toString());
+        defaultPVADecimals.toPrice((r / math.evaluate('10^6')).toString());
       this.logger.debug(`ask random: ${BigInt(r)}`);
       this.logger.debug(`ask price: ${BigInt(price)}`);
       inputs.push({
