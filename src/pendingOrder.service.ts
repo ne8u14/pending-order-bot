@@ -15,8 +15,8 @@ import {
 } from '../scripts/declarations';
 import { defaultPVADecimals } from './PVADecimals';
 import { get_canister_id, get_order_count, get_range } from './dfxJson';
-import { SubmitOrderDetails } from '@deland-labs/fusion_client/interface';
 import { DepthDto } from './pendingOrder.dto';
+import { SubmitOrderDetails } from '../scripts/declarations/fusion/fusion.did';
 
 @Injectable()
 export class PendingOrderService {
