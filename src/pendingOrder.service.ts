@@ -11,7 +11,6 @@ import {
   DETH_DICP_orderbook_kline,
   DETH_DICP_user,
 } from '../scripts/declarations';
-import logger from 'node-color-log';
 import { defaultPVADecimals } from './PVADecimals';
 import { get_canister_id } from './dfxJson';
 
@@ -26,8 +25,8 @@ export class PendingOrderService {
     );
     const response = await actor.get_depth(0, 100);
     if ('Ok' in response) {
-      logger.debug(response.Ok.asks);
-      logger.debug(response.Ok.bids);
+      this.logger.debug(response.Ok.asks);
+      this.logger.debug(response.Ok.bids);
     }
   }
 
@@ -39,7 +38,7 @@ export class PendingOrderService {
 
     const response = await actor.get_current_kline(5);
     if ('Ok' in response) {
-      logger.debug(response.Ok);
+      this.logger.debug(response.Ok);
     }
   }
 
