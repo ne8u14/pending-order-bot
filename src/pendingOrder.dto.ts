@@ -1,7 +1,8 @@
 export interface CanisterJson {
   host: string;
   canisters: CanisterDto[];
-  range: string;
+  max: string;
+  min: string;
   orderCount: number;
 }
 

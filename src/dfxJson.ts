@@ -18,9 +18,13 @@ export const get_canister_id = (name: string): Principal => {
   return Principal.fromText(canister_json.canisters[name]);
 };
 
-export const get_range = (): number => {
+export const get_max = (): number => {
   const canister_json = get_canister_json();
-  return math.evaluate(canister_json.range);
+  return math.evaluate(canister_json.max);
+};
+export const get_min = (): number => {
+  const canister_json = get_canister_json();
+  return math.evaluate(canister_json.min);
 };
 export const get_order_count = (): number => {
   const canister_json = get_canister_json();

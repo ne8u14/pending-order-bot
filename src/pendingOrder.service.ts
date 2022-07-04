@@ -14,7 +14,7 @@ import {
   DETH_DICP_user,
 } from '../scripts/declarations';
 import { defaultPVADecimals } from './PVADecimals';
-import { get_canister_id, get_order_count, get_range } from './dfxJson';
+import { get_canister_id, get_max, get_min, get_order_count } from './dfxJson';
 import { DepthDto } from './pendingOrder.dto';
 import { SubmitOrderDetails } from '../scripts/declarations/fusion/fusion.did';
 
@@ -35,7 +35,7 @@ export class PendingOrderService {
     const inputs: SubmitOrderDetails[] = [];
     for (let i = 0; i < get_order_count(); i++) {
       const price =
-        Math.floor(Math.random() * Number(depthDto.askPrice) + get_range()) + 1;
+        Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
       this.logger.debug(`price: ${BigInt(price)}`);
       inputs.push({
         Limit: {

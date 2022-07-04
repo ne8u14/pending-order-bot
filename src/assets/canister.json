@@ -1,6 +1,7 @@
 {
   "host": "https://8000-delandlabs-delandcanist-3o8tyj4qjap.ws.gitpod.nicepod.xyz/",
-  "range": "10^4",
+  "max": "10^4",
+  "min": "10^3",
   "orderCount": 10,
   "canisters": {
     "token_test_DBTC": "q3fc5-haaaa-aaaaa-aaahq-cai",
