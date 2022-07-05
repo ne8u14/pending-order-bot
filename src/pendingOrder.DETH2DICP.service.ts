@@ -14,7 +14,13 @@ import {
   DETH_DICP_user,
 } from '../scripts/declarations';
 import { defaultPVADecimals } from './PVADecimals';
-import { get_canister_id, get_max, get_min, get_order_count } from './dfxJson';
+import {
+  get_canister_id,
+  get_max,
+  get_min,
+  get_order_count,
+  get_random_price,
+} from './dfxJson';
 import { DepthDto } from './pendingOrder.dto';
 import { SubmitOrderDetails } from '../scripts/declarations/fusion/fusion.did';
 import * as math from 'mathjs';
@@ -36,29 +42,7 @@ export class PendingOrderDETH2DICPService {
     //ask
     const inputs: SubmitOrderDetails[] = [];
     for (let i = 0; i < get_order_count(); i++) {
-      const r =
-        Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
-      const price =
-        kline.high -
-        defaultPVADecimals.toPrice((r / math.evaluate('10^6')).toString());
-      this.logger.debug(`bid random: ${BigInt(r)}`);
-      this.logger.debug(`bid price: ${BigInt(price)}`);
-      inputs.push({
-        Limit: {
-          order_direction: { Bid: null },
-          price: BigInt(price),
-          volume: defaultPVADecimals.toVolume(
-            (Math.random() * 100 + 10).toString(),
-          ),
-        },
-      });
-    }
-    for (let i = 0; i < get_order_count(); i++) {
-      const r =
-        Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
-      const price =
-        kline.high +
-        defaultPVADecimals.toPrice((r / math.evaluate('10^6')).toString());
+      const price = kline.close - get_random_price();
       this.logger.debug(`bid random: ${BigInt(r)}`);
       this.logger.debug(`bid price: ${BigInt(price)}`);
       inputs.push({
@@ -80,29 +64,7 @@ export class PendingOrderDETH2DICPService {
     //ask
     const inputs: SubmitOrderDetails[] = [];
     for (let i = 0; i < get_order_count(); i++) {
-      const r =
-        Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
-      const price =
-        kline.low -
-        defaultPVADecimals.toPrice((r / math.evaluate('10^6')).toString());
-      this.logger.debug(`ask random: ${BigInt(r)}`);
-      this.logger.debug(`ask price: ${BigInt(price)}`);
-      inputs.push({
-        Limit: {
-          order_direction: { Ask: null },
-          price: BigInt(price),
-          volume: defaultPVADecimals.toVolume(
-            (Math.random() * 100 + 10).toString(),
-          ),
-        },
-      });
-    }
-    for (let i = 0; i < get_order_count(); i++) {
-      const r =
-        Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
-      const price =
-        kline.low +
-        defaultPVADecimals.toPrice((r / math.evaluate('10^6')).toString());
+      const price = kline.close + get_random_price();
       this.logger.debug(`ask random: ${BigInt(r)}`);
       this.logger.debug(`ask price: ${BigInt(price)}`);
       inputs.push({
