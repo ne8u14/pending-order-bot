@@ -1,8 +1,10 @@
 export interface CanisterJson {
   host: string;
   canisters: CanisterDto[];
-  max: string;
-  min: string;
+  maxPrice: string;
+  minPrice: string;
+  maxVolume: string;
+  minVolume: string;
   orderCount: number;
 }
 

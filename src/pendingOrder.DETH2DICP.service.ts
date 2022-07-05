@@ -10,7 +10,11 @@ import {
   DETH_DICP_user,
 } from '../scripts/declarations';
 import { defaultPVADecimals } from './PVADecimals';
-import { get_order_count, get_random_price } from './dfxJson';
+import {
+  get_order_count,
+  get_random_price,
+  get_random_volume,
+} from './dfxJson';
 import { DepthDto } from './pendingOrder.dto';
 import { SubmitOrderDetails } from '../scripts/declarations/fusion/fusion.did';
 import { KlineTick } from '../scripts/declarations/orderbook_kline/orderbook_kline.did';
@@ -47,9 +51,7 @@ export class PendingOrderDETH2DICPService {
         Limit: {
           order_direction: { Bid: null },
           price: BigInt(price),
-          volume: defaultPVADecimals.toVolume(
-            (Math.random() * 100 + 10).toString(),
-          ),
+          volume: get_random_volume(),
         },
       });
     }
@@ -68,9 +70,7 @@ export class PendingOrderDETH2DICPService {
         Limit: {
           order_direction: { Ask: null },
           price: BigInt(price),
-          volume: defaultPVADecimals.toVolume(
-            (Math.random() * 100 + 10).toString(),
-          ),
+          volume: get_random_volume(),
         },
       });
     }

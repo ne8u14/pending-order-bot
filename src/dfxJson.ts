@@ -19,20 +19,37 @@ export const get_canister_id = (name: string): Principal => {
   return Principal.fromText(canister_json.canisters[name]);
 };
 
-export const get_max = (): number => {
+export const get_max_price = (): number => {
   const canister_json = get_canister_json();
-  return math.evaluate(canister_json.max);
+  return math.evaluate(canister_json.maxPrice);
 };
-export const get_min = (): number => {
+export const get_min_price = (): number => {
   const canister_json = get_canister_json();
-  return math.evaluate(canister_json.min);
+  return math.evaluate(canister_json.minPrice);
+};
+export const get_max_volume = (): number => {
+  const canister_json = get_canister_json();
+  return math.evaluate(canister_json.maxVolume);
+};
+export const get_min_volume = (): number => {
+  const canister_json = get_canister_json();
+  return math.evaluate(canister_json.minVolume);
 };
 
 export const get_random_price = (): bigint => {
   const price =
-    Math.floor(Math.random() * (get_max() - get_min() + 1)) + get_min();
+    Math.floor(Math.random() * (get_max_price() - get_min_price() + 1)) +
+    get_min_price();
   return defaultPVADecimals.toPrice((price / math.evaluate('10^4')).toString());
 };
+
+export const get_random_volume = (): bigint => {
+  const volume =
+    Math.floor(Math.random() * (get_max_volume() - get_min_volume() + 1)) +
+    get_min_volume();
+  return defaultPVADecimals.toVolume(volume.toString());
+};
+
 export const get_order_count = (): number => {
   const canister_json = get_canister_json();
   return canister_json.orderCount;
