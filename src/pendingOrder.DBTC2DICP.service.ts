@@ -4,29 +4,30 @@ import {
   createFusionActor,
   createOrderbook_depthActor,
   createOrderbook_klineActor,
-  DETH_DICP_fusion,
-  DETH_DICP_orderbook_depth,
-  DETH_DICP_orderbook_kline,
-  DETH_DICP_user,
+  DBTC_DICP_fusion,
+  DBTC_DICP_orderbook_depth,
+  DBTC_DICP_orderbook_kline,
+  DBTC_DICP_user,
 } from '../scripts/declarations';
 import { defaultPVADecimals } from './PVADecimals';
 import { get_order_count, get_random_price } from './dfxJson';
 import { DepthDto } from './pendingOrder.dto';
 import { SubmitOrderDetails } from '../scripts/declarations/fusion/fusion.did';
+
 import { KlineTick } from '../scripts/declarations/orderbook_kline/orderbook_kline.did';
 
 @Injectable()
-export class PendingOrderDETH2DICPService {
+export class PendingOrderDBTC2DICPService {
   private readonly user: string;
   private readonly canisterFusion: string;
   private readonly canisterKline: string;
   private readonly canisterDepth: string;
 
   constructor(private logger: Logger) {
-    this.user = DETH_DICP_user;
-    this.canisterFusion = DETH_DICP_fusion;
-    this.canisterKline = DETH_DICP_orderbook_kline;
-    this.canisterDepth = DETH_DICP_orderbook_depth;
+    this.user = DBTC_DICP_user;
+    this.canisterFusion = DBTC_DICP_fusion;
+    this.canisterKline = DBTC_DICP_orderbook_kline;
+    this.canisterDepth = DBTC_DICP_orderbook_depth;
   }
 
   async cancelAllOrder(): Promise<void> {
@@ -56,6 +57,7 @@ export class PendingOrderDETH2DICPService {
     const response = await actor.batch_submit_order(inputs);
     this.logger.debug(`bid response: ${JSON.stringify(response)}`);
   }
+
   async createAskOrder(): Promise<void> {
     const actor = createFusionActor(this.canisterFusion, this.user);
     const kline = await this.getKline();
