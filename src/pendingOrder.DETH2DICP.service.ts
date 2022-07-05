@@ -43,7 +43,6 @@ export class PendingOrderDETH2DICPService {
     const inputs: SubmitOrderDetails[] = [];
     for (let i = 0; i < get_order_count(); i++) {
       const price = kline.close - get_random_price();
-      this.logger.debug(`bid random: ${BigInt(r)}`);
       this.logger.debug(`bid price: ${BigInt(price)}`);
       inputs.push({
         Limit: {
@@ -65,7 +64,6 @@ export class PendingOrderDETH2DICPService {
     const inputs: SubmitOrderDetails[] = [];
     for (let i = 0; i < get_order_count(); i++) {
       const price = kline.close + get_random_price();
-      this.logger.debug(`ask random: ${BigInt(r)}`);
       this.logger.debug(`ask price: ${BigInt(price)}`);
       inputs.push({
         Limit: {
