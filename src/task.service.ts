@@ -23,7 +23,7 @@ export class TasksService {
     await this.pendingOrderDETH2DICPService.getKline();
     await this.pendingOrderDETH2DICPService.approve(
       DETH_DICP_user,
-      '10^9',
+      '10^4',
       get_canister_id(DETH_DICP_fusion).toText(),
     );
     await this.pendingOrderDETH2DICPService.cancelAllOrder();
@@ -38,7 +38,7 @@ export class TasksService {
     await this.pendingOrderDBTC2DICPService.getKline();
     await this.pendingOrderDBTC2DICPService.approve(
       DBTC_DICP_user,
-      '10^9',
+      '10^4',
       get_canister_id(DBTC_DICP_fusion).toText(),
     );
     await this.pendingOrderDBTC2DICPService.cancelAllOrder();

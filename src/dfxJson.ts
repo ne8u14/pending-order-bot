@@ -46,9 +46,11 @@ export const get_random_price = (): bigint => {
 export const get_random_volume = (): bigint => {
   const volume =
     Math.floor(Math.random() * (get_max_volume() - get_min_volume() + 1)) +
-    get_min_volume() +
-    math.evaluate('123 * 10^8');
-  return defaultPVADecimals.toVolume(volume.toString());
+    get_min_volume();
+  return (
+    defaultPVADecimals.toVolume((volume / math.evaluate('10^8')).toString()) +
+    defaultPVADecimals.toVolume('123')
+  );
 };
 
 export const get_order_count = (): number => {
