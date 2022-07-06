@@ -48,11 +48,13 @@ export class PendingOrderDBTC2DICPService {
     for (let i = 0; i < get_order_count(); i++) {
       const price = kline.close - get_random_price();
       this.logger.debug(`bid price: ${BigInt(price)}`);
+      const volume = get_random_volume();
+      this.logger.debug(`bid volume: ${BigInt(volume)}`);
       inputs.push({
         Limit: {
           order_direction: { Bid: null },
           price: BigInt(price),
-          volume: get_random_volume(),
+          volume: volume,
         },
       });
     }
@@ -68,11 +70,13 @@ export class PendingOrderDBTC2DICPService {
     for (let i = 0; i < get_order_count(); i++) {
       const price = kline.close + get_random_price();
       this.logger.debug(`ask price: ${BigInt(price)}`);
+      const volume = get_random_volume();
+      this.logger.debug(`ask volume: ${BigInt(volume)}`);
       inputs.push({
         Limit: {
           order_direction: { Ask: null },
           price: BigInt(price),
-          volume: get_random_volume(),
+          volume: volume,
         },
       });
     }
