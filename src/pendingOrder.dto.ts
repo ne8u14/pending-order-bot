@@ -5,6 +5,7 @@ export interface CanisterJson {
   minPrice: string;
   maxVolume: string;
   minVolume: string;
+  baseVolume: string;
   orderCount: number;
 }
 

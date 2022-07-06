@@ -35,6 +35,10 @@ export const get_min_volume = (): number => {
   const canister_json = get_canister_json();
   return math.evaluate(canister_json.minVolume);
 };
+export const get_base_volume = (): number => {
+  const canister_json = get_canister_json();
+  return math.evaluate(canister_json.baseVolume);
+};
 
 export const get_random_price = (): bigint => {
   const price =
@@ -49,7 +53,7 @@ export const get_random_volume = (): bigint => {
     get_min_volume();
   return (
     defaultPVADecimals.toVolume((volume / math.evaluate('10^8')).toString()) +
-    defaultPVADecimals.toVolume('123')
+    defaultPVADecimals.toVolume(get_base_volume().toString())
   );
 };
 
